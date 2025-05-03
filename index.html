@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDesign Innovations</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        @font-face {
+          font-family: 'NRT Regular';
+          src: url('/mnt/data/2d5996a4-d528-4f2a-aa68-eb0ee60bd7dd.ttf') format('truetype');
+        }
+    
+        @font-face {
+          font-family: 'NRT Bold';
+          src: url('/mnt/data/16d883bd-c9e7-42a4-8c40-67a62978e393.ttf') format('truetype');
+        }
+      </style>
+
+
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a1a;
+            color: #f5f5dc;
+            overflow-x: hidden;
+        }
+
+        .overlay {
+            display: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #111;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            animation: slideDownNav 0.8s ease-out;
+        }
+
+        @keyframes slideDownNav {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .nav-logo {
+            width: 80px;
+            height: auto;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeInSlideDown 0.6s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeInSlideDown {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-logo:hover { transform: scale(1.1); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #A3D39C;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        section {
+            padding: 140px 20px 20px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #home {
+            background-image: url('websitebackground.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        #home h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            color: #ffffff;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        #home h1:hover { transform: scale(1.05); }
+        #home h1 .highlight-green { color: #A3D39C; }
+
+        #home p {
+            font-family: 'Inter', sans-serif;
+            max-width: 600px;
+            font-weight: 400;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        /* OUR WORKS SECTION */
+        .our-works-container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .our-works-header {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #A3D39C;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .image-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-card-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            padding: 0.75rem;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-card:hover .image-card-title {
+            opacity: 1;
+        }
+
+        /* SERVICES SECTION */
+     
+ /* ===== Desktop View ===== */
+
+ body {
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background-color: #101010;
+}
+
+#services {
+  background-color: #181818;
+  padding: 100px 20px 60px;
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.services-header {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #A2FF9E;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  background-color: #222;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+}
+
+.service-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.service-overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  width: 100%;
+  padding: 15px 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.service-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  line-height: 1.6;
+}
+
+
+
+        /* Mobile View Adjustments */
+        @media (max-width: 768px) {
+            nav {
+                justify-content: flex-end; /* Push content to the right */
+                padding: 1rem; /* Adjust padding */
+            }
+
+            .nav-logo {
+                position: absolute; /* Allow precise positioning */
+                top: 1rem; /* Adjust top position */
+                left: 1rem; /* Adjust left position */
+                opacity: 1; /* Ensure it's visible */
+                transform: translateY(0); /* Reset transform */
+                animation: none; /* Disable animation */
+                width: 60px; /* Adjust logo size if needed */
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 2rem;
+                color: white;
+                cursor: pointer;
+                z-index: 1001;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                margin-right: 1rem; /* Add some space to the right of the icon */
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+
+            .nav-links.active {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #111;
+                flex-direction: column;
+                align-items: center;
+                display: flex !important;
+                animation: slideDownMenu 0.5s ease forwards;
+            }
+
+            nav a {
+                padding: 1rem;
+                width: 100%;
+                text-align: center;
+                font-size: 1.2rem;
+            }
+
+            @keyframes slideDownMenu {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+
+            .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-image {
+    height: 220px;
+  }
+
+  .service-title {
+    font-size: 1rem;
+    padding: 0 5px;
+  }
+
+  .service-overlay {
+    padding: 12px 8px;
+  }
+}
+
+        
+
+/* بەشی نرخەکان */
+
+  body {
+    background-color: #1a1a1a;
+    color: #d3ffd3;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0px;
+    margin: 0;
+  }
+
+  h1, h2, h3, button, #whatsapp-btn {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  h1, p {
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+  }
+
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  select, button {
+    padding: 10px 100px; /* Increased horizontal padding */
+    font-size: 18px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #111;
+    color: #fff;
+  }
+
+button {
+background: linear-gradient(to right, #a1db91, #007f66);
+border: none;
+border-radius: 3px;
+padding: 10px 90px; /* Increased horizontal padding */
+color: white;
+font-size: 1.2rem;
+font-weight: 600;
+font-family: 'NRT', sans-serif;
+cursor: pointer;
+box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+transform: scale(1.03);
+box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+
+
+  #result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00ffae;
+  }
+
+  #whatsapp-btn {
+    display: none;
+    margin: 20px auto;
+    padding: 14px 24px;
+    font-size: 18px;
+    background: linear-gradient(90deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #whatsapp-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .quality-description {
+    margin-top: 30px;
+  }
+
+  .quality-box {
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .low-quality { color: white; }
+  .medium-quality { color: rgb(255, 255, 255); }
+  .full-quality { color: rgb(255, 255, 255); }
+
+  @media (min-width: 600px) {
+    .quality-description {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .quality-box {
+      width: 30%;
+    }
+  }
+
+/* بەشی نرخەکان kotayy */
+
+
+
+/* بەشی about us  */
+
+@import url('https://fonts.cdnfonts.com/css/nrt');
+
+
+header {
+  padding: 4rem 2rem 2rem;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #9ae6b4;
+  border-bottom: 4px solid #68d391;
+  letter-spacing: 1px;
+}
+
+.about-container {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 3rem;
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+  border-radius: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  font-size: 1.15rem;
+}
+
+.about-container ul {
+  padding-right: 1.5rem;
+  margin-top: 2rem;
+}
+
+.about-container ul li {
+  background: linear-gradient(to left, #212020, #212020);
+  color: #ffffff;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0px;
+  font-weight: bold;
+  list-style: none;
+}
+
+@media (max-width: 768px) {
+  header {
+    font-size: 1.8rem;
+  }
+
+  .about-container {
+    padding: 2rem;
+    margin: 2rem 1rem;
+    font-size: 1.05rem;
+  }
+}
+
+/* بەشی about us  */
+
+
+
+/* بەشی conatct us  */
+
+/* Default styles for larger screens (as before) */
+.contact-info {
+  background: linear-gradient(145deg, #181818, #0a0a0a);
+  padding: 55px;
+  border-radius: 24px;
+  margin-bottom: 60px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(100, 227, 159, 0.15);
+  opacity: 0;
+  animation: fadeIn 0.7s ease-out forwards 0.4s;
+  backdrop-filter: blur(8px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact-info h3 {
+  color: #8affc1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2em;
+  margin-bottom: 30px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(138, 255, 193, 0.25);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.contact-info p {
+  color: #d4d4d4;
+  font-family: 'Merriweather', serif;
+  font-size: 1.15em;
+  line-height: 1.9;
+  margin-bottom: 25px;
+}
+
+.contact-info strong {
+  font-weight: 700;
+  color: #8affc1;
+}
+
+.contact-info a {
+  color: #bbf5c7;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+  font-weight: 600;
+}
+
+.contact-info a:hover {
+  color: #8affc1;
+  text-shadow: 0 0 8px rgba(138, 255, 193, 0.6);
+}
+
+.social-links {
+  margin-top: 40px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 36px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #c7c7c7;
+  font-size: 1em;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.social-links a:hover {
+  color: #8affc1;
+  background-color: rgba(138, 255, 193, 0.1);
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(138, 255, 193, 0.4);
+  border-color: rgba(138, 255, 193, 0.3);
+}
+
+/* Media query for mobile devices (max-width: 768px) */
+@media (max-width: 768px) {
+  .contact-info {
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  .contact-info h3 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+  }
+
+  .contact-info p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .social-links {
+    margin-top: 25px;
+    gap: 10px; /* Slightly reduced gap to accommodate wider buttons */
+    justify-content: center;
+  }
+
+  .social-links a {
+    padding: 12px 20px; /* Increased horizontal padding */
+    min-width: 120px; /* Ensure a minimum width for easier tapping */
+    border-radius: 24px;
+    font-size: 0.9em;
+  }
+}
+
+/* بەشی conatct us  */
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="overlay" id="overlay"></div>
+    <nav>
+        <img src="idesign (2).png" alt="iDesign Logo" class="nav-logo">
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="#home" class="active-link">پەڕەی سەرەکی</a>
+            <a href="#our-jobs">نمونەی کارەکانمان</a>
+            <a href="#services">خزمەتگوزاریەکانمان</a>
+            <a href="#prices">نرخی خەمڵێنراو</a>
+            <a href="#about">دەربارەی ئێمە</a>
+            <a href="#contact">پەیوەندیکردن</a>
+        </div>
+    </nav>
+
+    <section id="home">
+        <h1>لەگەڵ داهێنانەکانی <span class="highlight-green">ئای دیزاین </span>مەحاڵ پێناسەیەکی تری هەیە</h1>
+        <p>بەخێربێن بۆ داهێنانەکانی ئای دیزاین، کە تێیدا بۆشاییەکان پێناسە دەکەینەوە و خەونەکانتان دەکەینە واقیع</p>
+        <p>ئێمە پسپۆڕین لە دروستکردنی دیزاین کە لە ڕووی جوانکارییەوە دڵخۆشکەر و کارایی و بەپێی تۆ بێت</p>
+    </section>
+
+
+    <section id="our-jobs" class="animate-on-scroll">
+        <div class="our-works-container">
+            <h2 class="our-works-header">کارەکانمان</h2>
+            <div class="image-grid">
+                <div class="image-card">
+                    <img src="1680168674864 (2).jpg" alt="Exterior Design">
+                    <h3 class="image-card-title">دیزاینی دەرەوە/واجیهە</h3>
+                </div>
+                <div class="image-card">
+                    <img src="BED.jpg" alt="Bedroom">
+                    <h3 class="image-card-title">دیزاینی ژووری خەوتن</h3>
+                </div>
+                <div class="image-card">
+                    <img src="aa (3).jpg" alt="Bathroom">
+                    <h3 class="image-card-title">دیزاینی حەمام و توالێت</h3>
+                </div>
+                <div class="image-card">
+                    <img src="LIVING.png" alt="Living Room">
+                    <h3 class="image-card-title">دیزاینی ژووری دانیشتن</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    
+    <section id="services">
+     
+        <section id="services">
+          <div class="services-container">
+            <h2 class="services-header">خزمەتگوزاریەکانمان</h2>
+            <div class="services-grid">
+              <div class="service-card">
+                <div class="service-image-container">
+                  <img src="سێتی خەریتە.png" alt="Interior Design" class="service-image">
+                  <div class="service-overlay">
+                    <h3 class="service-title">دروستکردنی سێتی خەریتە</h3>
+                  </div>
+                </div>
+              </div>
+        
+              <div class="service-card">
+                <div class="service-image-container">
+                  <img src="سێ دووری ناوەوە و دەرەوە.jpg" alt="Exterior Design" class="service-image">
+                  <div class="service-overlay">
+                    <h3 class="service-title">دیزاینی ناوەوە دەرەوە بەشێوەی سێ دووری</h3>
+                  </div>
+                </div>
+              </div>
+        
+              <div class="service-card">
+                <div class="service-image-container">
+                  <img src="ستراکچەر.jpg" alt="Landscape Design" class="service-image">
+                  <div class="service-overlay">
+                    <h3 class="service-title">دیزاینی ستراکتەر (انشائئ)</h3>
+                  </div>
+                </div>
+              </div>
+        
+
+
+              <div class="service-card">
+                <div class="service-image-container">
+                  <img src="میکانیک.png" alt="Landscape Design" class="service-image">
+                  <div class="service-overlay">
+                    <h3 class="service-title">جێ بە جێ کردنی هە موو کارێکی میکانیک</h3>
+                  </div>
+                </div>
+              </div>
+        
+
+
+
+              <div class="service-card">
+                <div class="service-image-container">
+                  <img src="دیکۆراتی ناوەوە.jpg" alt="Landscape Design" class="service-image">
+                  <div class="service-overlay">
+                    <h3 class="service-title">جێ بە جێ کردنی دیکۆراتی ناوەوە</h3>
+                  </div>
+                </div>
+              </div>
+        
+
+
+              <div class="service-card">
+                <div class="service-image-container">
+                  <img src="تەعمیرکردنەوەی.jpg" alt="Landscape Design" class="service-image">
+                  <div class="service-overlay">
+                    <h3 class="service-title">تەعمیرکردنەوەی هەموو جۆرە پڕۆژەیەک</h3>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+              <div class="service-card">
+                <div class="service-image-container">
+                  <img src="دیزاینی دەرەوە.jpg" alt="Furniture Design" class="service-image">
+                  <div class="service-overlay">
+                    <h3 class="service-title">دیزین و جێ بە جێ کردنی واجیهه</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+             
+      
+    </section>
+
+
+
+
+    <section id="prices">
+        <h1>نرخی خەمڵێنراو</h1>
+        <p>فۆڕمەکە پڕبکە بۆ دۆزینەوەی نرخەکە</p>
+  <div class="form-group">
+    <label for="ground">ڕووبەری زەوی (متر٢):</label>
+    <select id="ground">
+      <option value="">هەلبژێرە</option>
+      <script>
+        for(let i=100; i<=1000; i+=100){
+          document.write(`<option value="${i}">${i}</option>`);
+        }
+      </script>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label for="area">ڕووبەری بینا (متر٢):</label>
+    <select id="area">
+      <option value="">هەلبژێرە</option>
+      <script>
+        for(let i=100; i<=1000; i+=100){
+          document.write(`<option value="${i}">${i}</option>`);
+        }
+      </script>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label for="floors">ژمارەی نهۆمانەکان/قاتەکان:</label>
+    <select id="floors">
+      <option value="">هەلبژێرە</option>
+      <script>
+        for(let i=1; i<=47; i++){
+          document.write(`<option value="${i}">${i}</option>`);
+        }
+      </script>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label for="quality">کوالێتی بیناکەت چۆنبێت؟</label>
+    <select id="quality">
+      <option value="">هەلبژێرە</option>
+      <option value="low">نزم</option>
+      <option value="medium">مامناوەند</option>
+      <option value="full">نایاب</option>
+    </select>
+  </div>
+
+
+  <button onclick="calculate()">بنێرە بۆ وەرگرتنی نرخی خەمڵێنراو</button>
+
+  <div id="result">نرخی خەمڵێنراو</div>
+
+  <a id="whatsapp-btn" target="_blank">بنێرە بۆ واتسئەپەکەمان بۆ زانیاری زۆر وردتر</a>
+  <div class="quality-description">
+    <div class="quality-box low-quality">
+      <h3>کوالێتی نزم</h3>
+      <p>ئەساس بەس بنی دیوار ، هەیکەلی دیواری بلۆک ، دیکۆری دەرەوە لەبغ و بۆیاخ ، پەنجەرە و دەرگا پلاستیک.</p>
+    </div>
+    <div class="quality-box medium-quality">
+      <h3>کوالێتی مامناوەند</h3>
+      <p>ئەساس کامل زەوی ، هەیکەلی دیواری بلۆک ، پەنجەرەی دەرەو ئەلەمنیۆم ، دەکت ، مەغریبی ، دیکۆری دەرەو ئەسترۆپۆڵ یان سمنت بۆرد.</p>
+    </div>
+    <div class="quality-box full-quality">
+      <h3>کوالێتی نایاب</h3>
+      <p>ئەساس کامل ، جۆری هەیکەل جسرو پایە، دیوار خشت، شۆڤاژ، مەغریبی، دەکت، دەرگا و پەنجەرە ئەلەمنیۆم.</p>
+    </div>
+  </div>
+
+
+  <script>
+    function calculate() {
+      const ground = document.getElementById("ground").value;
+      const area = parseInt(document.getElementById("area").value);
+      const floors = parseInt(document.getElementById("floors").value);
+      const quality = document.getElementById("quality").value;
+      const resultDiv = document.getElementById("result");
+      const whatsappBtn = document.getElementById("whatsapp-btn");
+
+      if (!ground || !area || !floors || !quality) {
+        resultDiv.innerText = "⚠️ تکایە هەموو خانەکان پڕبکە.";
+        whatsappBtn.style.display = "none";
+        return;
+      }
+
+      let rate = 0;
+      if (quality === "low") rate = 200;
+      else if (quality === "medium") rate = 230;
+      else if (quality === "full") rate = 255;
+
+      const total = area * floors * rate;
+      resultDiv.innerText = `نرخی خەمڵێنراو: $${total.toLocaleString()}`;
+
+      const message = `سڵاو، ئەمە هەژماری خوێندراوە:\n\nڕووبەری زەوی: ${ground} م٢\nڕووبەری بینا: ${area} م٢\nژمارەی قۆناغەکان: ${floors}\nکوالێتی: ${quality}\nنرخی خەمڵێنراو: $${total.toLocaleString()}\n\nتکایە ناردن بۆ زانیاری زیاتر.`;
+      const phone = '9647741581989';
+      const link = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+      whatsappBtn.href = link;
+      whatsappBtn.style.display = "block";
+    }
+  </script>
+
+    </section>
+
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    </script>
+
+
+
+<section id="about" class="animate-on-scroll">
+    <header>دەربارەی ئێمە</header>
+  <div class="about-container">
+
+    <p>بەخێربێن بۆ داهێنانەکانی ئای دیزاین، کە داهێنان لەگەڵ وردبینی لە جیهانی دیزایندا یەکدەگرێتەوە. بە ساڵانێک لە سۆز و شارەزایی، ئێمە خۆمان وەک هێزێکی پێشەنگ لە گۆڕینی زەویەکان بۆ ژینگەیەکی سەرنجڕاکێش دامەزراندووە.</p>
+
+    <p>لە ئای دیزاین، ئێمە پێمان وایە کە هەموو بۆشاییەک چیرۆکێکی ناوازەی هەیە بۆ گێڕانەوە. ئەرکی ئێمە یارمەتیدانی ئێوەیە بۆ خستنەڕووی ئەو چیرۆکە لە ڕێگەی چارەسەری دیزاینی بیرکراوە و داهێنەرانە. جا شوێنی نیشتەجێبوون بێت، بازرگانی، یان گشتی، ئێمە بە دیدێکی نوێ و پابەندبوونێکی بێوچان بە باشترینەوە لە هەر پڕۆژەیەک نزیک دەبینەوە.</p>
+
+    <p>تیمەکەمان پێکهاتووە لە دیزاینەران و تەلارساز و پیشەسازییە لێهاتووەکانی بەرز کە بە هاوبەشی کاردەکەن بۆ ئەوەی دیدگاکەتان بە ژیان بهێننەوە. ئێمە تەکنەلۆژیای پێشکەوتوو لەگەڵ تەکنیکە کات بەسەرچووەکان تێکەڵ دەکەین بۆ دروستکردنی دیزاینێک کە نەک تەنها لە ڕووی جوانکارییەوە دڵخۆشکەر بێت بەڵکو کارایی و بەردەوامیش بێت.</p>
+
+    <p>ئەوەی ئێمە جیا دەکاتەوە، ڕێبازی ئێمەیە کە سەنتەری کڕیارە. ئێمە بە وردی گوێ لە پێداویستییەکان و ئارەزووەکانت و ئاواتەکانت دەگرین، دڵنیا دەبینەوە لەوەی کە دیزاینی کۆتایی ڕەنگدانەوەی کەسایەتی و شێوازی تۆیە. هەروەها ئێمە باوەڕمان بە پەیوەندی و هاوکاری شەفاف هەیە بە درێژایی پرۆسەی دیزاین، ئاگادارکردنەوە و بەشداریکردنتان لە هەموو هەنگاوەکانی ڕێگاکەدا.</p>
+
+    <p>لە پەرەپێدانی چەمکەوە تا تەواوکردنی پڕۆژە، ئێمە کۆمەڵێک خزمەتگوزاری دیزاینی گشتگیر پێشکەش دەکەین، لەوانە:</p>
+
+    <ul>
+      <li>دیزاینی ناوەوە</li>
+      <li>دیزاینی دەرەوە</li>
+      <li>پلاندانان</li>
+      <li>بینینی سێ ڕەهەندی</li>
+      <li>هەڵبژاردنی مۆبیلیات</li>
+      <li>بەڕێوەبردنی پرۆژە</li>
+    </ul>
+
+    <p>ئێمە بە سۆزەوە پاڵنانی سنوورەکانی دیزاین و گەڕان بەدوای ئەگەرە نوێیەکاندایە. ئێمە لە نوێترین ڕەوت و تەکنەلۆژیاکان ئاگادار دەبین، بەردەوام بەدوای ئیلهامدا دەگەڕێین لە سەرانسەری جیهان. ئامانجمان دروستکردنی فەزایە کە نەک تەنها پێداویستییەکانتان دابین بکات بەڵکو لە چاوەڕوانییەکانتان زیاتر بێت.</p>
+    <p>سوپاس بۆ ڕەچاوکردنی داهێنانەکانی ئایدیزاین بۆ پێداویستییەکانی دیزاینەکەت. ئێمە بەوپەڕی خۆشحاڵییەوە چاوەڕێی ئەو دەرفەتە دەکەین کە هاوکاریتان بکەین و دیدگاکەتان بە ژیان بهێننەوە.</p>
+  </div>
+</section>
+
+
+
+<section id="contact">
+
+    <header>پەیوەندیمان پێوە بکە</header>
+    <div class="contact-info">
+        <h3>زانیاری پەیوەندی</h3>
+        <p> <a href="mailto:idesign.kurd@gmail.com">idesignkurd@gmail.com</a> <strong>:ئیمەیڵ</strong> </p>
+        <p><strong> ناونیشانی ئۆفیسی سەرەکیمان:</strong> سلێمانی، گەڕەکی شارەوانی / بەرامبەر فامیلی مۆڵ</p>
+      
+        <div class="social-links">
+          <a href="https://www.facebook.com/share/1EpzaMdHpN/?mibextid=wwXIfr" target="_blank"> Facebook</a>
+          <a href="https://www.instagram.com/idesign.kurd?igsh=dWNnMDV5Y2c0Ng%3D%3D&utm_source=qr" target="_blank"> Instagram</a>
+          <a href="https://www.tiktok.com/@idesign.kurd?_t=ZS-8vy1f1REFGC&_r=1" target="_blank"> TikTok</a>
+          <a href="https://wa.me/message/W2CWMUGZRCJRL1" target="_blank"> WhatsApp</a>
+          <a href="tel:+9647741581989" target="_blank">ژمارەی موبایل</a>
+        </div>
+      </div>
+
+</section>
+
+
+</body>
+</html>
